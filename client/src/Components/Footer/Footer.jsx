@@ -85,7 +85,7 @@ export default function FooterComp() {
           </div>
         </div>
         <Footer.Divider />
-        <div className="w-full sm:flex sm:items-center sm:justify-between">
+        <div className="w-full sm:flex sm:items-center sm:justify-between ">
           <Footer.Copyright
             href="#"
             by="Uday_kalse"
