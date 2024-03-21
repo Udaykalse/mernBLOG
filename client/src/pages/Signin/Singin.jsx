@@ -7,6 +7,7 @@ import {
   signInSuccess,
 } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Auth from "../../Components/Auth/Auth";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -101,6 +102,7 @@ export default function Signin() {
                 "Sign In"
               )}
             </Button>
+            <Auth/>
           </form>
           <div className="flex gap-2 text-sm mt-5 ">
             <span className="">Don't have an account?</span>
