@@ -63,3 +63,38 @@ export  const signin = async (req, res, next)=>{
     next(error);
   }
 }
+
+export const google =async(req,res,next)=>{
+  const {email,name,googlePhotoUrl}=req.body;
+  try{
+    const user=await User.findOne({email});
+    if(user){
+      const token =jwt.sign({id:user._id},process.env.JWT_SECRET);
+      const {password, ...rest}=user._doc;
+      res.status(200).cookie(
+        'access_token',token,{
+          httpOnly:true,
+
+        }
+      )
+      .json(rest);
+    }else{
+      const generatePassword=Math.random().toString(36).slice(-8)+ Math.random().toString(36).slice(-8);
+      const newUser = new User({
+        username:name.toLowerCase().split(' ')+Math.random().toString(9).slice(-4),email,password:hashedPassword,profilePicture:googlePhotoUrl,
+      })
+       await newUser.save();
+       consttoken =jwt.sign({id:newUser._id},process.env.JWT_SECRET);
+       const  {password , ...otherData}=newUser._doc;
+       res
+       .status(200)
+       .cookie('access_token',tooken,{
+        httpOnly:true,
+       })
+       .json(res);
+    }
+  }catch(error){
+    next(error)
+  }
+
+}
